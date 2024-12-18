@@ -3,7 +3,7 @@ package com.example.ucp2_pam.Data.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "Mata Kuliah")
+@Entity(tableName = "MataKuliah")
 data class matakuliah(
     @PrimaryKey
     val kode: String,
