@@ -10,6 +10,8 @@ import com.example.ucp2_pam.repository.RepositoryMatakuliah
 
 interface InterfaceContainerApp {
     val repositoryMatakuliah : RepositoryMatakuliah
+    val repositoryDosen: RepositoryDosen
+
 
 }
 class ContainerApp(private val context: Context) : InterfaceContainerApp {
