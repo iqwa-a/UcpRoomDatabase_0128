@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface DosenDao {
     @Insert
-    suspend fun insertdosen(
+    suspend fun insertDosen(
         dosen: Dosen
     )
 
