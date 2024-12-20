@@ -1,0 +1,34 @@
+package com.example.ucp2_pam.Data.database
+
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.example.ucp2_pam.Data.dao.DosenDao
+import com.example.ucp2_pam.Data.dao.MatakuliahDao
+import com.example.ucp2_pam.Data.entity.Dosen
+import com.example.ucp2_pam.Data.entity.Matakuliah
+
+// Mendefinisikan database Room dengan entitas mahasiswa
+@Database(entities = [Dosen::class, Matakuliah::class ], version = 1, exportSchema = false)
+abstract class KrsDatabase : RoomDatabase() {
+
+    abstract fun dosenDao(): DosenDao
+    abstract fun matakuliahDao(): MatakuliahDao
+
+    companion object {
+        @Volatile
+        private var Instance: KrsDatabase? = null
+
+        fun getDatabase(context: Context): KrsDatabase {
+            return (Instance ?: synchronized(this) {
+                Room.databaseBuilder(
+                    context,
+                    KrsDatabase::class.java,
+                    "KrsDatabase"
+                )
+                    .build(). also { Instance = it }
+            })
+        }
+    }
+}
