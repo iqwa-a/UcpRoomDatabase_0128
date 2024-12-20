@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "dosen")
 data class Dosen(
     @PrimaryKey // Menandai kolom Nidn sebagai primary key
-    val Nidn: String, // Nomor Induk, unik untuk setiap mahasiswa
-    val Nama: String, // Nama mahasiswa
-    val jenisKelamin: String, // Jenis kelamin mahasiswa
+    val nidn: String, // Nomor Induk, unik untuk setiap mahasiswa
+    val nama: String, // Nama mahasiswa
+    val jeniskelamin: String, // Jenis kelamin mahasiswa
 )
