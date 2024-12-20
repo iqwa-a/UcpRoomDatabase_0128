@@ -5,25 +5,25 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.ucp2_pam.Data.entity.dosen
+import com.example.ucp2_pam.Data.entity.Dosen
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface DosenDao {
     @Insert
     suspend fun insertdosen(
-        dosen: dosen
+        dosen: Dosen
     )
 
     @Query("SELECT * FROM dosen ORDER BY nama ASC")
-    fun getAlldosen(): Flow<List<dosen>>
+    fun getAlldosen(): Flow<List<Dosen>>
 
     @Query("SELECT * FROM dosen WHERE Nidn = :nim")
-    fun getdosen(nim: String): Flow<dosen>
+    fun getdosen(nim: String): Flow<Dosen>
 
     @Delete
-    suspend fun deletedosen(dosen: dosen)
+    suspend fun deletedosen(dosen: Dosen)
 
     @Update
-    suspend fun updatedosen(dosen: dosen)
+    suspend fun updatedosen(dosen: Dosen)
 }

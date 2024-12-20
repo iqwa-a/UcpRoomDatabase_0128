@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 // Menandai kelas ini sebagai entitas database untuk tabel "dosen"
 @Entity(tableName = "dosen")
-data class dosen(
+data class Dosen(
     @PrimaryKey // Menandai kolom Nidn sebagai primary key
     val Nidn: String, // Nomor Induk, unik untuk setiap mahasiswa
     val Nama: String, // Nama mahasiswa
