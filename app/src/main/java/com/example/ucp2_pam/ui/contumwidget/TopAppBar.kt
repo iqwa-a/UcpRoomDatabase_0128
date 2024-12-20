@@ -10,6 +10,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -19,13 +20,14 @@ fun TopAppBar(
     onBack: () -> Unit,
     showBackButton: Boolean = true,
     judul: String,
-    modifier: Modifier
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = Color(0xFF343434), // Primary background color
+    contentColor: Color = Color.White // Text and icon color
 ){
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        contentAlignment = Alignment.Center
+            .padding(vertical = 16.dp, horizontal = 8.dp)
     ) {
         if (showBackButton) {
             Row(
@@ -46,6 +48,7 @@ fun TopAppBar(
             text = judul,
             fontSize = 25.sp,
             fontWeight = FontWeight.Bold,
+            color = contentColor,
             modifier = Modifier.align(Alignment.Center)
         )
     }
