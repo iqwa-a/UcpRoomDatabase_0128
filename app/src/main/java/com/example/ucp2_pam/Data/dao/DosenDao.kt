@@ -16,14 +16,9 @@ interface DosenDao {
     )
 
     @Query("SELECT * FROM dosen ORDER BY nama ASC")
-    fun getAlldosen(): Flow<List<Dosen>>
+    fun getAllDsn(): Flow<List<Dosen>>
 
-    @Query("SELECT * FROM dosen WHERE Nidn = :nim")
-    fun getdosen(nim: String): Flow<Dosen>
+    @Query("SELECT * FROM dosen WHERE Nidn = :nidn")
+    fun getDosen(nim: String): Flow<Dosen>
 
-    @Delete
-    suspend fun deletedosen(dosen: Dosen)
-
-    @Update
-    suspend fun updatedosen(dosen: Dosen)
 }
