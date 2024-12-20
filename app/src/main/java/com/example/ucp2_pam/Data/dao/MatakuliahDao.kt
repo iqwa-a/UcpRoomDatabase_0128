@@ -11,18 +11,20 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MatakuliahDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMatakuliah(matakuliah: Matakuliah): Long
-
-    @Query("SELECT * FROM MataKuliah ORDER BY nama ASC")
-    fun getAllmatakuliah(): Flow<List<Matakuliah>>
-
+    @Insert
+    suspend fun insertMatakuliah(
+        matakuliah: Matakuliah
+    )
+    //getAllMatakuliah
+    @Query("SELECT * FROM matakuliah ORDER BY nama ASC")
+    fun getAllMtk() : Flow<List<Matakuliah>>
+    //getMatakuliah
     @Query("SELECT * FROM matakuliah WHERE kode = :kode")
-    fun getmatakuliah(nim: String): Flow<Matakuliah>
-
+    fun getMatakuliah(kode: String): Flow<Matakuliah>
+    //deleteMatakuliah
     @Delete
-    suspend fun deletematakuliah(mahasiswa: Matakuliah)
-
+    suspend fun deleteMatakuliah (matakuliah: Matakuliah)
+    //updateMatakuliah
     @Update
-    suspend fun updatematakuliah(mahasiswa:Matakuliah)
+    suspend fun updateMatakuliah (matakuliah: Matakuliah)
 }
