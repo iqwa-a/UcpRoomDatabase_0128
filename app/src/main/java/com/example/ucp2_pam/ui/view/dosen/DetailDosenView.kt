@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -14,8 +15,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.ucp2_pam.Data.entity.Dosen
 import com.example.ucp2_pam.ui.contumwidget.TopAppBar
 import com.example.ucp2_pam.ui.viewmodel.dosen.DetailDosenViewModel
 import com.example.ucp2_pam.ui.viewmodel.dosen.DetailUiState
@@ -86,5 +91,49 @@ fun BodyDetailDosen(
                 )
             }
         }
+    }
+}
+@Composable
+fun ItemDetailDosen(
+    modifier: Modifier = Modifier,
+    dosen: Dosen
+) {
+    Card(
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            ComponentDetailDosen(judul = "NIDN",
+                isinya = dosen.nidn)
+            Spacer(modifier = Modifier.padding(4.dp))
+            ComponentDetailDosen(judul = "Nama",
+                isinya = dosen.nama)
+            Spacer(modifier = Modifier.padding(4.dp))
+            ComponentDetailDosen(judul = "Jenis Kelamin",
+                isinya = dosen.jeniskelamin)
+            Spacer(modifier = Modifier.padding(4.dp))
+        }
+    }
+}
+
+@Composable
+fun ComponentDetailDosen(
+    modifier: Modifier = Modifier,
+    judul: String,
+    isinya: String,
+) {
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            text = "$judul : ",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Gray
+        )
+        Text(
+            text = isinya,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }
