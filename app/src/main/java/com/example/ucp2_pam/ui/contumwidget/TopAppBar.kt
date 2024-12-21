@@ -21,29 +21,36 @@ fun TopAppBar(
     showBackButton: Boolean = true,
     judul: String,
     modifier: Modifier = Modifier,
-    backgroundColor: Color = Color(0xFF343434), // Primary background color
-    contentColor: Color = Color.White // Text and icon color
-){
+    backgroundColor: Color = Color(0xFF180303), // Primary background color
+    contentColor: Color = Color.Black // Text and icon color
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp, horizontal = 8.dp)
     ) {
         if (showBackButton) {
             Row(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 4.dp), // Tambahkan padding kecil untuk estetika
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                TextButton(
+                IconButton(
                     onClick = onBack,
                     modifier = Modifier.align(Alignment.CenterVertically)
                 ) {
-                    Text("Kembali")
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Filled.ArrowBack, // Menggunakan ikon panah kembali
+                        contentDescription = "Back Icon",
+                        tint = contentColor, // Warna ikon mengikuti `contentColor`
+                        modifier = Modifier.size(50.dp) // Ukuran ikon diatur menjadi 24.dp
+                    )
                 }
-                Spacer(modifier = Modifier.weight(2f))
+                Spacer(modifier = Modifier.weight(1f))
             }
         }
-
+        // Centered title text
         Text(
             text = judul,
             fontSize = 25.sp,
