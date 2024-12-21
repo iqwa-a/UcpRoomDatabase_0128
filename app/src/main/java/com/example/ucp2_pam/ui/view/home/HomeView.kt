@@ -43,7 +43,7 @@ fun HomeView(
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color(0xFFF2F2F2)) //
+            .background(Color.Black) //
     ) {
         // Include the TopAppBar at the top
         TopAppBar(
@@ -62,36 +62,51 @@ fun HomeView(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Buttons
-            AnimatedButton(text = "Input Dosen", onClick = onDosenClick)
-            AnimatedButton(text = "Input Matakuliah", onClick = onMataKuliahClick)
+            // Buttons with animations
+            AnimatedButton(text = "Input Dosen",
+                icon = Icons.Filled.Person, onClick = onDosenClick)
+            AnimatedButton(text = "Input Matakuliah",
+                icon = Icons.Filled.Edit, onClick = onMataKuliahClick)
         }
     }
 }
 
 @Composable
-fun AnimatedButton(
-    text: String,
-    onClick: () -> Unit
-) {
+fun AnimatedButton(text: String, icon: androidx.compose.ui.graphics.vector.ImageVector, onClick: () -> Unit) {
+    var isPressed by remember { mutableStateOf(false) }
+
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color(0xFF343434), // Warna latar tombol
             contentColor = Color.White // Warna teks
         ),
-        shape = RectangleShape, // Bentuk tombol menjadi kotak
+        shape = RectangleShape, // Bentuk tombol menjadi persegi
         modifier = Modifier
-            .padding(horizontal = 10.dp, vertical = 10.dp)
-            .height(80.dp)
-            .fillMaxWidth(0.9f)
-            .shadow(10.dp, shape = RectangleShape) // Bayangan berbentuk kotak
-    ) {
-        // Text only
-        Text(
-            text = text,
-            fontSize = 21.sp, // Ukuran font teks
-            fontWeight = FontWeight.Bold
-        )
+            .padding(horizontal = 25.dp, vertical = 25.dp)
+            .size(250.dp) // Ukuran panjang dan lebar sama
+            .shadow(25.dp, shape = RectangleShape) // Bayangan berbentuk kotak
+    )
+    {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            // Icon with increased size
+            Icon(
+                imageVector = icon,
+                contentDescription = null,
+                modifier = Modifier
+                    .padding(end = 10.dp) // Padding between icon and text
+                    .size(50.dp), // Increased icon size
+                tint = Color.White
+            )
+            // Text
+            Text(
+                text = text,
+                fontSize = 18.sp, // Ukuran font teks
+                fontWeight = FontWeight.Bold
+            )
+        }
     }
 }
