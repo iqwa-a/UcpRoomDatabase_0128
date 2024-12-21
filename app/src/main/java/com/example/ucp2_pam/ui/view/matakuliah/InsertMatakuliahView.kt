@@ -124,3 +124,125 @@ fun InsertBodyMatakuliah(
         }
     }
 }
+@Composable
+fun FormMatakuliah(
+    matakuliahEvent: MatakuliahEvent = MatakuliahEvent(),
+    onValueChange: (MatakuliahEvent) -> Unit = {},
+    errorState: FormErrorState = FormErrorState(),
+    modifier: Modifier = Modifier,
+    listDsn: List<Dosen>
+) {
+    val sks = listOf("1", "2", "3", "4", "5", "6")
+    val jenis = listOf("Wajib", "Peminatan")
+    val namaDosenList = listDsn.map { it.nama }
+
+    Column(
+        modifier = modifier.fillMaxWidth()
+    ) {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = matakuliahEvent.kode,
+            onValueChange = {
+                onValueChange(matakuliahEvent.copy(kode = it))
+            },
+            label = { Text("Kode") },
+            isError = errorState.kode != null,
+            placeholder = { Text("Masukkan Kode") },
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number)
+        )
+        Text(
+            text = errorState.kode ?: "",
+            color = Color.Red
+        )
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = matakuliahEvent.nama,
+            onValueChange = {
+                onValueChange(matakuliahEvent.copy(nama = it))
+            },
+            label = { Text("Nama") },
+            isError = errorState.nama != null,
+            placeholder = { Text("Masukkan Nama") },
+        )
+        Text(
+            text = errorState.nama ?: "",
+            color = Color.Red
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(text = "SKS")
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            sks.forEach { sksOption ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start
+                ) {
+                    RadioButton(
+                        selected = matakuliahEvent.sks == sksOption,
+                        onClick = {
+                            onValueChange(matakuliahEvent.copy(sks = sksOption))
+                        },
+                    )
+                    Text(text = sksOption)
+                }
+            }
+        }
+
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = matakuliahEvent.semester,
+            onValueChange = {
+                onValueChange(matakuliahEvent.copy(semester = it))
+            },
+            label = { Text("Semester") },
+            isError = errorState.semester != null,
+            placeholder = { Text("Masukkan Semester") },
+        )
+        Text(
+            text = errorState.semester ?: "",
+            color = Color.Red
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(text = "Jenis")
+        Row(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            jenis.forEach { jenisOption ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start
+                ) {
+                    RadioButton(
+                        selected = matakuliahEvent.jenis == jenisOption,
+                        onClick = {
+                            onValueChange(matakuliahEvent.copy(jenis = jenisOption))
+                        },
+                    )
+                    Text(text = jenisOption)
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Text(text = "Dosen Pengampu")
+        DynamicSelectedTextField(
+            selectedValue = matakuliahEvent.dosenpengampu,
+            options = namaDosenList,
+            label = "Pilih Dosen Pengampu",
+            onValueChangedEvent = {
+                onValueChange(matakuliahEvent.copy(dosenpengampu = it))
+            }
+        )
+        Text(
+            text = errorState.dosenpengampu ?: "",
+            color = Color.Red
+        )
+    }
+}
