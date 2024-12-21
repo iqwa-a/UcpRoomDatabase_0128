@@ -46,3 +46,26 @@ class DetailDosenViewModel(
             ),
         )
 }
+// Data class untuk UI State
+data class DetailUiState(
+    val detailUiEvent: DosenEvent = DosenEvent(),
+    val isLoading: Boolean = false,
+    val isError: Boolean = false,
+    val errorMessage: String = ""
+) {
+    val isUiEventEmpty: Boolean
+        get() = detailUiEvent == DosenEvent()
+
+    val isUiEventNotEmpty: Boolean
+        get() = detailUiEvent != DosenEvent()
+}
+
+// Fungsi ekstensi untuk mengubah Mahasiswa menjadi MahasiswaEvent
+fun Dosen.toDetailUiEvent(): DosenEvent {
+    return DosenEvent(
+        nidn = nidn,
+        nama = nama,
+        jenisKelamin = jeniskelamin
+    )
+}
+
