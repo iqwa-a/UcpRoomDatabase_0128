@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.ucp2_pam.Data.entity.Matakuliah
 import com.example.ucp2_pam.repository.RepositoryMatakuliah
 import kotlinx.coroutines.launch
 
@@ -63,3 +64,39 @@ class MatakuliahViewModel(private val repositoryMatakuliah: RepositoryMatakuliah
 
 
 }
+data class MatakuliahUIState(
+    val matakuliahEvent: MatakuliahEvent = MatakuliahEvent(),
+    val isEntryValid:FormErrorState = FormErrorState(),
+    val snackBarMessage: String? = null,
+)
+data class FormErrorState(
+    val kode:String? =null,
+    val nama:String?= null,
+    val sks:String?=null,
+    val semester:String?=null,
+    val jenis: String?=null,
+    val dosenpengampu:String?=null
+){
+    fun isValid():Boolean{
+        return kode ==null && nama ==null &&sks==null&&semester==null&&jenis==null&&dosenpengampu==null
+    }
+}
+
+//menyimpan input form ke entity
+fun MatakuliahEvent.toMatakuliahEntity(): Matakuliah = Matakuliah(
+    kode = kode,
+    nama = nama,
+    sks = sks,
+    semester = semester,
+    jenis = jenis,
+    dosenpengampu = dosenpengampu
+)
+//data class variable yang ,menyimpan data input form
+data class MatakuliahEvent(
+    val kode:String ="",
+    val nama:String="",
+    val sks:String="",
+    val semester:String="",
+    val jenis: String="",
+    val dosenpengampu:String=""
+)
