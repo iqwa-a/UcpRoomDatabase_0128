@@ -3,6 +3,7 @@ package com.example.ucp2_pam.ui.view.matakuliah
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.CircularProgressIndicator
@@ -21,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.ucp2_pam.Data.entity.Matakuliah
 import com.example.ucp2_pam.ui.contumwidget.TopAppBar
 import kotlinx.coroutines.launch
 
@@ -120,5 +122,26 @@ fun BodyHomeMatakuliahView(
                 modifier = modifier
             )
         }
+    }
+}
+
+@Composable
+fun ListMatakuliah(
+    listMtk: List<Matakuliah>,
+    modifier: Modifier = Modifier,
+    onClick: (String) -> Unit = { }
+) {
+    LazyColumn(
+        modifier = modifier
+    ) {
+        items(
+            items = listMtk,
+            itemContent = { mtk ->
+                CardMatakuliah(
+                    mtk = mtk,
+                    onClick = { onClick(mtk.kode) }
+                )
+            }
+        )
     }
 }
